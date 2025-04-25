@@ -1,0 +1,2 @@
+# Celestium-vpn-bot
+BOT AUTOMÁTICO DA CELESTIUM VPN
