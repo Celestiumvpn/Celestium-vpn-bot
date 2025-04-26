@@ -17,7 +17,7 @@ def send_message():
     message = data.get('message')
 
     payload = {
-    "phone": phone,
+    "phone": phone
     "message": {
         "text": message
     }
