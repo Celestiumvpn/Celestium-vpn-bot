@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 
 app = Flask(__name__)
 
-
 # Credenciais da Z-API
 ID_INSTANCE = '3E04E0E5568A20BC7EA3A622FD8B21DA'
 TOKEN_INSTANCE = 'E02980FF2B6A3D74CB2021B2'
