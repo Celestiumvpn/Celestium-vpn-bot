@@ -1,7 +1,8 @@
 import requests
 from flask import Flask, request, jsonify
 
-app = Flask(_name_)
+app = Flask(__name__)
+
 
 # Credenciais da Z-API
 ID_INSTANCE = '3E04E0E5568A20BC7EA3A622FD8B21DA'
