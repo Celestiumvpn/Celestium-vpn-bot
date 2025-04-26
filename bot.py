@@ -1,44 +1,36 @@
-from flask import Flask, request
 import requests
+from flask import Flask, request, jsonify
 
-app = Flask(__name__)
+app = Flask(_name_)
 
-# Troque pelos seus dados da API do Zap'n
-ZAPN_TOKEN = "SEU_TOKEN_AQUI"
-ZAPN_INSTANCE_ID = "SEU_ID_AQUI"
+# Credenciais da Z-API
+ID_INSTANCE = '3E04E0E5568A20BC7EA3A622FD8B21DA'
+TOKEN_INSTANCE = 'E02980FF2B6A3D74CB2021B2'
 
-@app.route("/", methods=["GET"])
-def home():
-    return "Celestium VPN - Online", 200
+# Endpoint da Z-API
+BASE_URL = f"https://api.z-api.io/instances/{ID_INSTANCE}/token/{TOKEN_INSTANCE}/send-text"
 
-@app.route("/", methods=["POST"])
-def webhook():
+@app.route('/send', methods=['POST'])
+def send_message():
     data = request.get_json()
+    phone = data.get('phone')
+    message = data.get('message')
 
-    # Extrai informações básicas
-    phone_number = data['message']['from']
-    message_text = data['message']['body'].lower()
-
-    # Lógica de resposta simples
-    if "teste" in message_text:
-        send_message(phone_number, "Olá! Aqui é a CELESTIUM VPN. Seu teste gratuito foi iniciado. Aproveite!")
-    elif "comprar" in message_text:
-        send_message(phone_number, "Ótimo! Para comprar seu plano CELESTIUM VPN, envie seu comprovante para este número.")
-    else:
-        send_message(phone_number, "Olá, seja bem-vindo à CELESTIUM VPN! Para iniciar um teste, digite 'Teste'. Para comprar, digite 'Comprar'.")
-
-    return "Success", 200
-
-def send_message(phone, message):
-    url = f"https://api.z-api.io/instances/{ZAPN_INSTANCE_ID}/token/{ZAPN_TOKEN}/send-text"
     payload = {
         "phone": phone,
         "message": message
     }
-    headers = {
-        "Content-Type": "application/json"
-    }
-    requests.post(url, json=payload, headers=headers)
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    response = requests.post(BASE_URL, json=payload)
+
+    if response.status_code == 200:
+        return jsonify({"success": True, "response": response.json()})
+    else:
+        return jsonify({"success": False, "response": response.text}), response.status_code
+
+@app.route('/')
+def home():
+    return "Celestium VPN Bot Online! Comando para enviar: /send"
+
+if _name_ == '_main_':
+    app.run(host='0.0.0.0', port=10000)
