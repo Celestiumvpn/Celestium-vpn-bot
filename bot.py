@@ -16,11 +16,12 @@ def send_message():
     phone = data.get('phone')
     message = data.get('message')
 
-    payload = {
-    "phone": phone
+   payload = {
+    "phone": phone,
     "message": {
         "text": message
     }
+}
 
     headers = {
         "Content-Type": "application/json"
