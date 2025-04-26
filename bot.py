@@ -4,7 +4,7 @@ from flask import Flask, request, jsonify
 app = Flask(__name__)
 
 # Credenciais da Z-API
-ID_INSTANCE = '3E04E0E5568A20BC7EA3A622FD8B21DA'
+ID_INSTANCE = '3E040EE5568A20BC7EA3A622FD8821DA'
 TOKEN_INSTANCE = 'E02980FF2B6A3D74CB2021B2'
 
 # Endpoint da Z-API
@@ -16,12 +16,12 @@ def send_message():
     phone = data.get('phone')
     message = data.get('message')
 
-   payload = {
-    "phone": phone,
-    "message": {
-        "text": message
+    payload = {
+        "phone": phone,
+        "message": {
+            "text": message
+        }
     }
-}
 
     headers = {
         "Content-Type": "application/json"
@@ -34,5 +34,5 @@ def send_message():
     else:
         return jsonify({"success": False, "response": response.text}), response.status_code
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(host='0.0.0.0', port=10000)
