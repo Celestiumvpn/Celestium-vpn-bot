@@ -16,16 +16,12 @@ def send_message():
     phone = data.get('phone')
     message = data.get('message')
 
-    # Pega o Client-Token vindo do cabeçalho
-    client_token = request.headers.get('Client-Token')
-
     payload = {
         "phone": phone,
         "message": message
     }
 
     headers = {
-        "Client-Token": client_token,
         "Content-Type": "application/json"
     }
 
@@ -35,6 +31,6 @@ def send_message():
         return jsonify({"success": True, "response": response.json()})
     else:
         return jsonify({"success": False, "response": response.text}), response.status_code
-    
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
