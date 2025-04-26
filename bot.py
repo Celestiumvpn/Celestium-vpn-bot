@@ -31,6 +31,6 @@ def send_message():
 @app.route('/')
 def home():
     return "Celestium VPN Bot Online! Comando para enviar: /send"
-
-if _name_ == '_main_':
+    
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
